@@ -1,0 +1,15 @@
+<resources>
+    <string name="app_name">demo_autocapture</string>
+    <string name="document_auto_capture">autocapture</string>
+    <string name="dot_document_auto_capture_instruction_brightness_too_high">Less light needed</string>
+    <string name="dot_document_auto_capture_instruction_brightness_too_low">More light needed</string>
+    <string name="dot_document_auto_capture_instruction_candidate_selection">Hold still…</string>
+    <string name="dot_document_auto_capture_instruction_document_does_not_fit_placeholder">Center document</string>
+    <string name="dot_document_auto_capture_instruction_document_not_detected">Scan document</string>
+    <string name="dot_document_auto_capture_instruction_document_out_of_bounds">Center document</string>
+    <string name="dot_document_auto_capture_instruction_hotspots_score_too_high">Avoid reflections</string>
+    <string name="dot_document_auto_capture_instruction_mrz_not_present">Scan valid machine readable document</string>
+    <string name="dot_document_auto_capture_instruction_mrz_not_valid">Scan valid machine readable document</string>
+    <string name="dot_document_auto_capture_instruction_sharpness_too_low">More light needed</string>
+    <string name="dot_document_auto_capture_instruction_size_too_small">Move closer</string>
+</resources>
