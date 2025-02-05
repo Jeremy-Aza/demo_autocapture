@@ -51,5 +51,5 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.innovatrics.dot:dot-document:8.1.0")
+    implementation("com.innovatrics.dot:dot-document:8.6.1")
 }
