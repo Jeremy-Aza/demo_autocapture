@@ -2,13 +2,7 @@ import java.net.URI
 
 pluginManagement {
     repositories {
-        google {
-            content {
-                includeGroupByRegex("com\\.android.*")
-                includeGroupByRegex("com\\.google.*")
-                includeGroupByRegex("androidx.*")
-            }
-        }
+        google()
         mavenCentral()
         gradlePluginPortal()
     }
@@ -20,6 +14,9 @@ dependencyResolutionManagement {
         mavenCentral()
         maven {
             url = URI("https://maven.innovatrics.com/releases")
+        }
+        maven {
+            url = URI("https://jitpack.io")
         }
     }
 }

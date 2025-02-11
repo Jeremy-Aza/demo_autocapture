@@ -6,11 +6,6 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    data class MainState(
-        val isProcessing: Boolean = false,
-        val errorMessage: String? = null
-    )
-
     private val mutableState: MutableLiveData<MainState> = MutableLiveData<MainState>().apply { value = MainState() }
     val state: LiveData<MainState> = mutableState
 

@@ -1,16 +1,14 @@
 package com.example.demo_autocapture
 
 import android.os.Bundle
-import android.os.Build
 import android.view.View
 import androidx.activity.viewModels
-import android.view.WindowInsets
-import android.view.WindowInsetsController
 import androidx.appcompat.app.AppCompatActivity
 import com.google.android.material.progressindicator.CircularProgressIndicator
 import com.google.android.material.snackbar.Snackbar
 
-class MainActivity: AppCompatActivity(R.layout.activity_main) {
+class MainActivity : AppCompatActivity(R.layout.activity_main) {
+
     companion object {
         const val OVERLAY_ALPHA_NORMAL_SCREEN = 0.0f
         const val OVERLAY_ALPHA_DIM_SCREEN = 0.6f
@@ -25,7 +23,6 @@ class MainActivity: AppCompatActivity(R.layout.activity_main) {
         super.onCreate(savedInstanceState)
         setViews()
         setupMainViewModel()
-        supportActionBar?.hide()
     }
 
     private fun setViews() {

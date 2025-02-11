@@ -11,13 +11,8 @@ import kotlinx.coroutines.launch
 
 class DotSdkViewModel(
     application: Application,
-    private val initializeDotSdkUseCase: InitializeDotSdkUseCase,
+    private val initializeDotSdkUseCase: com.example.demo_autocapture.InitializeDotSdkUseCase,
 ) : AndroidViewModel(application) {
-
-    data class DotSdkState(
-        val isInitialized: Boolean = false,
-        val errorMessage: String? = null,
-    )
 
     private val mutableState = MutableStateFlow(DotSdkState())
     val state = mutableState.asStateFlow()

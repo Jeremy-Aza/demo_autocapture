@@ -1,4 +1,4 @@
-package com.example.demo_autocapture
+package com.example.demo_autocapture.documentautocapture
 
 import android.graphics.Bitmap
 

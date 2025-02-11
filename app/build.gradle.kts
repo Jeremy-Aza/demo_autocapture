@@ -1,6 +1,7 @@
 plugins {
-    alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.com.android.application)
+    alias(libs.plugins.org.jetbrains.kotlin.android)
+    alias(libs.plugins.org.jlleitschuh.gradle.ktlint)
 }
 
 android {
@@ -13,43 +14,55 @@ android {
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
         release {
-            isMinifyEnabled = false
+            isMinifyEnabled = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
             )
         }
     }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }
 
+    lint {
+        disable += "MonochromeLauncherIcon"
+    }
+
     packaging {
         resources {
-            excludes.add("**/libjnidispatch.a")
-            excludes.add("**/jnidispatch.dll")
-            excludes.add("**/libjnidispatch.jnilib")
-            excludes.add("**/*.proto")
+            excludes += listOf(
+                "**/jnidispatch.dll",
+                "**/libjnidispatch.a",
+                "**/libjnidispatch.jnilib",
+                "**/*.proto",
+            )
         }
     }
 }
 
 dependencies {
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.material)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
-    implementation("com.innovatrics.dot:dot-document:8.6.1")
+    implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.navigation.fragment.ktx)
+    implementation(libs.androidx.navigation.ui.ktx)
+    implementation(libs.com.github.tgo1014.jp2ForAndroid)
+    implementation(libs.com.google.android.material)
+    implementation(libs.com.innovatrics.dot.document)
+    implementation(libs.com.innovatrics.dot.face.detection.fast)
+    implementation(libs.com.innovatrics.dot.face.expression.neutral)
+}
+
+ktlint {
+    android = true
 }

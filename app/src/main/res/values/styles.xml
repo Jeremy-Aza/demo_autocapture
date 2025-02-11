@@ -1,5 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <style name="TextAppearance.Dot.Medium" parent="TextAppearance.AppCompat.Medium" />
-    <style name="TextAppearance.Dot.Medium.Instruction" />
-</resources>

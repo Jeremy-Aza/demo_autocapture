@@ -1,4 +1,4 @@
-package com.example.demo_autocapture
+package com.example.demo_autocapture.documentautocapture
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -9,10 +9,6 @@ import kotlinx.coroutines.launch
 class DocumentAutoCaptureViewModel(
     private val createUiResultUseCase: CreateUiResultUseCase,
 ) : ViewModel() {
-
-    data class DocumentAutoCaptureState(
-        val result: DocumentAutoCaptureResult? = null,
-    )
 
     private val mutableState: MutableLiveData<DocumentAutoCaptureState> = MutableLiveData()
     val state: LiveData<DocumentAutoCaptureState> = mutableState

@@ -1,0 +1,38 @@
+{
+    "version": "2.1",
+    "contract": {
+        "customer": "SumaMexico",
+        "expiration": {
+            "day": 6,
+            "month": 3,
+            "year": 2026
+        },
+        "hwids": [
+            "A+1Gg9hl/AAvQgID"
+        ],
+        "products": [
+            "iface"
+        ],
+        "idkit": {
+            "database_size": 0,
+            "max_client_connections": 0
+        },
+        "dot": {
+            "mobile": {
+                "face": {
+                    "enabled": true
+                },
+                "document": {
+                    "enabled": true
+                },
+                "faceLite": {
+                    "enabled": true
+                },
+                "palm": {
+                    "enabled": true
+                }
+            }
+        }
+    },
+    "contract_signature": "DjVA+7t9q9m6WWpxv338Mn1orSaTMma258nb4f6pT/SGdjq6LyareBhrvWHEFaF4Uk4NF63Zhvp0p0xCSOwukKzWy/T5Pk/w4eiUJ/XVf50eHR4A/qE+AYgcz4DVvO6ytthFzkHY3Wvz4cMKK6bGAJMkFb27jYnCMF/AfCxrum8="
+}
