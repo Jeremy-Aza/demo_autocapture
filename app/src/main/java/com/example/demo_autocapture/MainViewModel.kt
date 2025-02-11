@@ -6,7 +6,8 @@ import androidx.lifecycle.ViewModel
 
 class MainViewModel : ViewModel() {
 
-    private val mutableState: MutableLiveData<MainState> = MutableLiveData<MainState>().apply { value = MainState() }
+    private val mutableState: MutableLiveData<MainState> =
+        MutableLiveData<MainState>().apply { value = MainState() }
     val state: LiveData<MainState> = mutableState
 
     fun setProcessing(enabled: Boolean) {

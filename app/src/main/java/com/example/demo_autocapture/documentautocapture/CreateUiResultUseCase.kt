@@ -11,10 +11,11 @@ class CreateUiResultUseCase(
     private val ioDispatcher: CoroutineDispatcher = Dispatchers.IO,
 ) {
 
-    suspend operator fun invoke(sdkDocumentAutoCaptureResult: SdkDocumentAutoCaptureResult): DocumentAutoCaptureResult = withContext(ioDispatcher) {
-        DocumentAutoCaptureResult(
-            bitmap = BitmapFactory.create(sdkDocumentAutoCaptureResult.bgraRawImage),
-            documentAutoCaptureResult = sdkDocumentAutoCaptureResult,
-        )
-    }
+    suspend operator fun invoke(sdkDocumentAutoCaptureResult: SdkDocumentAutoCaptureResult): DocumentAutoCaptureResult =
+        withContext(ioDispatcher) {
+            DocumentAutoCaptureResult(
+                bitmap = BitmapFactory.create(sdkDocumentAutoCaptureResult.bgraRawImage),
+                documentAutoCaptureResult = sdkDocumentAutoCaptureResult,
+            )
+        }
 }

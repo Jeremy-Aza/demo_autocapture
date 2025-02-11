@@ -33,7 +33,8 @@ class InitializeDotSdkUseCase(
         ),
     )
 
-    private fun readLicenseBytes(resources: Resources) = resources.openRawResource(R.raw.dot_license).use(InputStream::readBytes)
+    private fun readLicenseBytes(resources: Resources) =
+        resources.openRawResource(R.raw.dot_license).use(InputStream::readBytes)
 
     private fun createDotFaceLibrary() = DotFaceLibrary(
         configuration = DotFaceLibraryConfiguration(

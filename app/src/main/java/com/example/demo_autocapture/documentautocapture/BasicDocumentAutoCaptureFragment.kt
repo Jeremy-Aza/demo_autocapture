@@ -26,7 +26,11 @@ import kotlinx.coroutines.launch
 class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
 
     private val mainViewModel: MainViewModel by activityViewModels()
-    private val dotSdkViewModel: DotSdkViewModel by activityViewModels { DotSdkViewModelFactory(requireActivity().application) }
+    private val dotSdkViewModel: DotSdkViewModel by activityViewModels {
+        DotSdkViewModelFactory(
+            requireActivity().application
+        )
+    }
     private val documentAutoCaptureViewModel: DocumentAutoCaptureViewModel by activityViewModels { DocumentAutoCaptureViewModelFactory() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -36,7 +40,19 @@ class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
     }
 
     override fun provideConfiguration(): Configuration {
-        return Configuration(cameraFacing = CameraFacing.BACK, cameraPreviewScaleType = CameraPreviewScaleType.FILL, validationMode = ValidationMode.STRICT, placeholderType = PlaceholderType.CORNERS_ONLY, isDetectionLayerVisible = true, mrzValidation = MrzValidation.NONE, qualityAttributeThresholds = QualityAttributeThresholds(minConfidence = 0.9, minSharpness = 0.6, maxHotspotsScore = 0.6))
+        return Configuration(
+            cameraFacing = CameraFacing.BACK,
+            cameraPreviewScaleType = CameraPreviewScaleType.FILL,
+            validationMode = ValidationMode.STRICT,
+            placeholderType = PlaceholderType.CORNERS_ONLY,
+            isDetectionLayerVisible = true,
+            mrzValidation = MrzValidation.NONE,
+            qualityAttributeThresholds = QualityAttributeThresholds(
+                minConfidence = 0.9,
+                minSharpness = 0.6,
+                maxHotspotsScore = 0.6
+            )
+        )
     }
 
     private fun setupDotSdkViewModel() {
