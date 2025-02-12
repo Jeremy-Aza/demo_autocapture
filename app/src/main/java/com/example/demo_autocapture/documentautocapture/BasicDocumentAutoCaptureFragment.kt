@@ -20,8 +20,6 @@ import com.innovatrics.dot.document.autocapture.QualityAttributeThresholds
 import com.innovatrics.dot.document.autocapture.ValidationMode
 import com.example.demo_autocapture.DotSdkViewModel
 import com.example.demo_autocapture.DotSdkViewModelFactory
-import com.example.demo_autocapture.MainViewModel
-import com.example.demo_autocapture.ui.createGson
 import com.innovatrics.dot.image.BgraRawImage
 import com.innovatrics.dot.image.BitmapFactory
 import kotlinx.coroutines.launch
@@ -29,8 +27,6 @@ import java.io.ByteArrayOutputStream
 
 class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
 
-    private val gson = createGson()
-    private val mainViewModel: MainViewModel by activityViewModels()
     private val dotSdkViewModel: DotSdkViewModel by activityViewModels {
         DotSdkViewModelFactory(
             requireActivity().application
@@ -88,12 +84,10 @@ class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
     }
 
     override fun onNoCameraPermission() {
-        mainViewModel.notifyNoCameraPermission()
+        Snackbar.make(requireView(), "No camera permission.", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onCaptured(result: DocumentAutoCaptureResult) {
-        //println("Result image: ${result.bgraRawImage}")
-        //println("Result data: ${gson.toJson(result.document)}")
         println("Result image base64 : ${imageToBase64(result.bgraRawImage)}")
     }
 
