@@ -1,6 +1,8 @@
 package com.example.demo_autocapture.documentautocapture
 
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Base64
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
@@ -20,7 +22,10 @@ import com.example.demo_autocapture.DotSdkViewModel
 import com.example.demo_autocapture.DotSdkViewModelFactory
 import com.example.demo_autocapture.MainViewModel
 import com.example.demo_autocapture.ui.createGson
+import com.innovatrics.dot.image.BgraRawImage
+import com.innovatrics.dot.image.BitmapFactory
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
 
 class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
 
@@ -43,8 +48,8 @@ class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
             cameraPreviewScaleType = CameraPreviewScaleType.FILL,
             validationMode = ValidationMode.STRICT,
             placeholderType = PlaceholderType.CORNERS_ONLY,
-            isDetectionLayerVisible = true,
-            mrzValidation = MrzValidation.NONE,
+            isDetectionLayerVisible = false,
+            mrzValidation = MrzValidation.VALIDATE_IF_PRESENT,
             qualityAttributeThresholds = QualityAttributeThresholds(
                 minConfidence = 0.9,
                 minSharpness = 0.6,
@@ -70,13 +75,26 @@ class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
         dotSdkViewModel.initializeDotSdkIfNeeded()
     }
 
+    private fun imageToBase64(bgraRawImage: BgraRawImage): String {
+        // Convert BgraRawImage to Bitmap
+        val bitmap = BitmapFactory.create(bgraRawImage)
+
+        //Convert Bitmap to base64
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+
+        return Base64.encodeToString(byteArray, Base64.NO_WRAP)
+    }
+
     override fun onNoCameraPermission() {
         mainViewModel.notifyNoCameraPermission()
     }
 
     override fun onCaptured(result: DocumentAutoCaptureResult) {
-        println("Result image: ${result.bgraRawImage}")
-        println("Result data: ${gson.toJson(result.document)}")
+        //println("Result image: ${result.bgraRawImage}")
+        //println("Result data: ${gson.toJson(result.document)}")
+        println("Result image base64 : ${imageToBase64(result.bgraRawImage)}")
     }
 
     override fun onProcessed(detection: DocumentAutoCaptureDetection) {
