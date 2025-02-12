@@ -6,7 +6,6 @@ import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.innovatrics.dot.camera.CameraFacing
 import com.innovatrics.dot.camera.CameraPreviewScaleType
@@ -20,23 +19,22 @@ import com.innovatrics.dot.document.autocapture.ValidationMode
 import com.example.demo_autocapture.DotSdkViewModel
 import com.example.demo_autocapture.DotSdkViewModelFactory
 import com.example.demo_autocapture.MainViewModel
-import com.example.demo_autocapture.R
+import com.example.demo_autocapture.ui.createGson
 import kotlinx.coroutines.launch
 
 class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
 
+    private val gson = createGson()
     private val mainViewModel: MainViewModel by activityViewModels()
     private val dotSdkViewModel: DotSdkViewModel by activityViewModels {
         DotSdkViewModelFactory(
             requireActivity().application
         )
     }
-    private val documentAutoCaptureViewModel: DocumentAutoCaptureViewModel by activityViewModels { DocumentAutoCaptureViewModelFactory() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDotSdkViewModel()
-        setupDocumentAutoCaptureViewModel()
     }
 
     override fun provideConfiguration(): Configuration {
@@ -72,21 +70,13 @@ class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
         dotSdkViewModel.initializeDotSdkIfNeeded()
     }
 
-    private fun setupDocumentAutoCaptureViewModel() {
-        documentAutoCaptureViewModel.initializeState()
-        documentAutoCaptureViewModel.state.observe(viewLifecycleOwner) { state ->
-            state.result?.let {
-                findNavController().navigate(R.id.action_BasicDocumentAutoCaptureFragment_to_DocumentAutoCaptureResultFragment)
-            }
-        }
-    }
-
     override fun onNoCameraPermission() {
         mainViewModel.notifyNoCameraPermission()
     }
 
     override fun onCaptured(result: DocumentAutoCaptureResult) {
-        documentAutoCaptureViewModel.process(result)
+        println("Result image: ${result.bgraRawImage}")
+        println("Result data: ${gson.toJson(result.document)}")
     }
 
     override fun onProcessed(detection: DocumentAutoCaptureDetection) {
