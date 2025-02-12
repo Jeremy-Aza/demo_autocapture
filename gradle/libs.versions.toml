@@ -1,7 +1,7 @@
 [versions]
 androidxConstraintlayout = "2.2.0"
 androidxNavigation = "2.8.5"
-comAndroid = "8.5.0"
+comAndroid = "8.7.3"
 orgJetbrainsKotlinAndroid = "1.9.24"
 orgJlleitschuhGradleKtlint = "12.1.1"
 comGithubTgo1014JP2ForAndroid = "1.0.4"
@@ -15,8 +15,6 @@ androidx-navigation-ui-ktx = { group = "androidx.navigation", name = "navigation
 com-github-tgo1014-jp2ForAndroid = { group = "com.github.Tgo1014", name = "JP2ForAndroid", version.ref = "comGithubTgo1014JP2ForAndroid" }
 com-google-android-material = { group = "com.google.android.material", name = "material", version.ref = "comGoogleAndroidMaterial" }
 com-innovatrics-dot-document = { group = "com.innovatrics.dot", name = "dot-document", version.ref = "comInnovatricsDot" }
-com-innovatrics-dot-face-detection-fast = { group = "com.innovatrics.dot", name = "dot-face-detection-fast", version.ref = "comInnovatricsDot" }
-com-innovatrics-dot-face-expression-neutral = { group = "com.innovatrics.dot", name = "dot-face-expression-neutral", version.ref = "comInnovatricsDot" }
 
 [plugins]
 com-android-application = { id = "com.android.application", version.ref = "comAndroid" }

@@ -28,12 +28,12 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
 
     lint {
@@ -59,8 +59,6 @@ dependencies {
     implementation(libs.com.github.tgo1014.jp2ForAndroid)
     implementation(libs.com.google.android.material)
     implementation(libs.com.innovatrics.dot.document)
-    implementation(libs.com.innovatrics.dot.face.detection.fast)
-    implementation(libs.com.innovatrics.dot.face.expression.neutral)
 }
 
 ktlint {
