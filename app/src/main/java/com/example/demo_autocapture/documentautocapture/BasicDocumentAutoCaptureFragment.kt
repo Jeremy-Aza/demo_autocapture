@@ -24,6 +24,7 @@ import com.innovatrics.dot.image.BgraRawImage
 import com.innovatrics.dot.image.BitmapFactory
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
+import java.io.File
 
 class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
 
@@ -41,11 +42,12 @@ class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
     override fun provideConfiguration(): Configuration {
         return Configuration(
             cameraFacing = CameraFacing.BACK,
+            isTorchEnabled = false,
             cameraPreviewScaleType = CameraPreviewScaleType.FILL,
             validationMode = ValidationMode.STRICT,
             placeholderType = PlaceholderType.CORNERS_ONLY,
             isDetectionLayerVisible = false,
-            mrzValidation = MrzValidation.VALIDATE_IF_PRESENT,
+            mrzValidation = MrzValidation.NONE,
             qualityAttributeThresholds = QualityAttributeThresholds(
                 minConfidence = 0.9,
                 minSharpness = 0.6,
