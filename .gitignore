@@ -8,3 +8,4 @@
 .externalNativeBuild
 .cxx
 *.log
+**/dot_license.lic
