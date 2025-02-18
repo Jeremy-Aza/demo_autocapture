@@ -1,12 +1,13 @@
 package com.example.demo_autocapture.documentautocapture
 
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Base64
 import android.view.View
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
-import androidx.navigation.fragment.findNavController
 import com.google.android.material.snackbar.Snackbar
 import com.innovatrics.dot.camera.CameraFacing
 import com.innovatrics.dot.camera.CameraPreviewScaleType
@@ -19,33 +20,33 @@ import com.innovatrics.dot.document.autocapture.QualityAttributeThresholds
 import com.innovatrics.dot.document.autocapture.ValidationMode
 import com.example.demo_autocapture.DotSdkViewModel
 import com.example.demo_autocapture.DotSdkViewModelFactory
-import com.example.demo_autocapture.MainViewModel
-import com.example.demo_autocapture.R
+import com.innovatrics.dot.image.BgraRawImage
+import com.innovatrics.dot.image.BitmapFactory
 import kotlinx.coroutines.launch
+import java.io.ByteArrayOutputStream
+import java.io.File
 
 class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
 
-    private val mainViewModel: MainViewModel by activityViewModels()
     private val dotSdkViewModel: DotSdkViewModel by activityViewModels {
         DotSdkViewModelFactory(
             requireActivity().application
         )
     }
-    private val documentAutoCaptureViewModel: DocumentAutoCaptureViewModel by activityViewModels { DocumentAutoCaptureViewModelFactory() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupDotSdkViewModel()
-        setupDocumentAutoCaptureViewModel()
     }
 
     override fun provideConfiguration(): Configuration {
         return Configuration(
             cameraFacing = CameraFacing.BACK,
+            isTorchEnabled = false,
             cameraPreviewScaleType = CameraPreviewScaleType.FILL,
             validationMode = ValidationMode.STRICT,
             placeholderType = PlaceholderType.CORNERS_ONLY,
-            isDetectionLayerVisible = true,
+            isDetectionLayerVisible = false,
             mrzValidation = MrzValidation.NONE,
             qualityAttributeThresholds = QualityAttributeThresholds(
                 minConfidence = 0.9,
@@ -72,21 +73,24 @@ class BasicDocumentAutoCaptureFragment : DocumentAutoCaptureFragment() {
         dotSdkViewModel.initializeDotSdkIfNeeded()
     }
 
-    private fun setupDocumentAutoCaptureViewModel() {
-        documentAutoCaptureViewModel.initializeState()
-        documentAutoCaptureViewModel.state.observe(viewLifecycleOwner) { state ->
-            state.result?.let {
-                findNavController().navigate(R.id.action_BasicDocumentAutoCaptureFragment_to_DocumentAutoCaptureResultFragment)
-            }
-        }
+    private fun imageToBase64(bgraRawImage: BgraRawImage): String {
+        // Convert BgraRawImage to Bitmap
+        val bitmap = BitmapFactory.create(bgraRawImage)
+
+        //Convert Bitmap to base64
+        val byteArrayOutputStream = ByteArrayOutputStream()
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream)
+        val byteArray = byteArrayOutputStream.toByteArray()
+
+        return Base64.encodeToString(byteArray, Base64.NO_WRAP)
     }
 
     override fun onNoCameraPermission() {
-        mainViewModel.notifyNoCameraPermission()
+        Snackbar.make(requireView(), "No camera permission.", Snackbar.LENGTH_SHORT).show()
     }
 
     override fun onCaptured(result: DocumentAutoCaptureResult) {
-        documentAutoCaptureViewModel.process(result)
+        println("Result image base64 : ${imageToBase64(result.bgraRawImage)}")
     }
 
     override fun onProcessed(detection: DocumentAutoCaptureDetection) {

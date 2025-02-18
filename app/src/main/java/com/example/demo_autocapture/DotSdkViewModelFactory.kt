@@ -12,7 +12,7 @@ class DotSdkViewModelFactory(
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
         return DotSdkViewModel(
             application,
-            com.example.demo_autocapture.InitializeDotSdkUseCase()
+            InitializeDotSdkUseCase()
         ) as T
     }
 }
